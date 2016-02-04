@@ -1,2 +1,8 @@
 ---
-# vars file for restlesset.filebeat
+filebeat_apt_repo: "deb https://packages.elastic.co/beats/apt stable main"
+
+filebeat_yum_repo_url: https://packages.elastic.co/beats/yum/el/$basearch
+
+filebeat_gpg_url: https://packages.elastic.co/GPG-KEY-elasticsearch
+
+filebeat_package_state: present

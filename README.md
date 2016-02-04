@@ -1,22 +1,32 @@
-restlesset.filebeat
+Restless-ET.filebeat
 =========
 
-An Ansible role for Elastic's Filebeat log shipper.
+An Ansible role for Logstash's Filebeat log shipper.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Nothing worth mentioning ...
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+- `filebeat_version` - The filebeat version to install. Defaults to: `1.0.1`
+- `filebeat_prospectors` - List of prospectors to fetch data.
+- `filebeat_logstash_enabled` - If Logstash output if enabled or not. Defaults to: `true`
+- `filebeat_logstash_index` - The index root name to write evetns to. Defaults to: `filebeat`
+- `filebeat_logstash_hosts` - The list of downstream Logstash servers. Defaults to: `["localhost:5044"]`
+- `filebeat_logstash_tls_insecure` - If the client skips verification of server certificates and host names. Defaults to: `false`
+- `filebeat_logstash_tls_certificate` - The path to your SSL client certificate.
+- `filebeat_logstash_tls_certificate_key` - The path to your SSL client certificate key.
+- `filebeat_logstash_tls_certificate_authorities` - The list of paths to root certificates for server verifications.
+- `filebeat_logstash_tls_timeout` - Network timeout in seconds. Defaults to: `15`
+
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+No dependecies. :-)
 
 Example Playbook
 ----------------
@@ -25,14 +35,20 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: Restless-ET.filebeat,
+             filebeat_prospectors:
+               - {
+                 document_type: syslog,
+                 paths: ['/var/log/syslog']
+               }
+           }
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Artur Melo

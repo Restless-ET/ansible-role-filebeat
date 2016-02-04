@@ -1,0 +1,22 @@
+filebeat:
+  prospectors:
+    {{ filebeat_prospectors | to_yaml | indent(4) }}
+
+output:
+  logstash:
+    enabled: {{ filebeat_logstash_enabled }}
+
+    index: {{ filebeat_logstash_index }}
+
+    hosts:
+      {{ filebeat_logstash_hosts | to_nice_yaml | indent(6) }}
+
+    tls:
+      insecure: {{ filebeat_logstash_tls_insecure }}
+
+      certificate: {{ filebeat_logstash_tls_certificate }}
+      certificate_key: {{ filebeat_logstash_tls_certificate_key }}
+      certificate_authorities:
+        {{ filebeat_logstash_tls_certificate_authorities | to_nice_yaml | indent(8) }}
+
+      timeout: {{ filebeat_logstash_tls_timeout }}
